@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
@@ -23,15 +24,14 @@ public class Test {
 	public static boolean isValidPath(String path) {
 	    try {
 	        Paths.get(path);
-	    } catch (InvalidPathException  ex) {
+	    } catch (InvalidPathException | NullPointerException ex) {
 	        return false;
 	    }
 	    return true;
 	}
 
 	public static void main(String[] args) {
-		String path="?Disk";
-		
+		String path=null;
 		System.out.println(isValidPath(path));
 //	        try {
 //
@@ -58,20 +58,20 @@ public class Test {
 
 	}
 	
-	private static class ProcessReadTask implements Callable<List<String>> {
-
-        private InputStream inputStream;
-
-        public ProcessReadTask(InputStream inputStream) {
-            this.inputStream = inputStream;
-        }
-
-        @Override
-        public List<String> call() {
-            return new BufferedReader(new InputStreamReader(inputStream))
-				.lines()
-				.collect(Collectors.toList());
-        }
-    }
+//	private static class ProcessReadTask implements Callable<List<String>> {
+//
+//        private InputStream inputStream;
+//
+//        public ProcessReadTask(InputStream inputStream) {
+//            this.inputStream = inputStream;
+//        }
+//
+//        @Override
+//        public List<String> call() {
+//            return new BufferedReader(new InputStreamReader(inputStream))
+//				.lines()
+//				.collect(Collectors.toList());
+//        }
+//    }
 
 }
